@@ -61,4 +61,48 @@ def countries_indicator(ind_code: str, year: int):
     ]
 
 
-print(countries_indicator("SP.POP.TOTL", 2024))
+result = countries_indicator("SP.POP.TOTL", 2024)
+
+#Put the indicator values in the list 
+test_list = []
+for countries in result:
+    test_list.append((countries['country']['value'], countries['value']))
+    
+#Print the indicators
+for item in test_list:
+   country = f"Country: {item[0]}, Population: {item[1]}"
+   print(country)
+
+# print(result[0]['country']['value'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
