@@ -60,17 +60,56 @@ def countries():
             if row["countryiso3code"] in allowed_countries
 
         ]
-
-
+    
     population = countries_indicator("SP.POP.TOTL", 2024)
+    gdp = countries_indicator("NY.GDP.PCAP.CD", 2024)
 
-    dict_list = []
-    for countries in population:
-        new_dict = {"country": countries['country']['value'], "value" :  countries['value']}
-        dict_list.append(new_dict)
+    def population_lookup(country_code):
 
-    return dict_list
+        country_code = country_code.upper()
+
+        for country in population:
+            if country.get("iso3") == country_code:
+                return country.get("value")
+            
+        return 'Country code not found'
+    
+
+    def gdp_lookup(country_code):
+
+        country_code = country_code.upper()
+
+        for country in gdp:
+            if country.get("iso3") == country_code:
+                return country.get("value")
+            
+        return 'Country code not found'
+    
+    def final_dict():
+        dict_list = []
+        for country in population:
+            new_dict = {"Country": country['country']['value'],
+                        "Population" : population_lookup(country['iso3']), 
+                        "GDP Per Capita" : gdp_lookup(country['iso3'])}
+            dict_list.append(new_dict)
+
+        return dict_list
+
+
+    
+
+    # dict_list = []
+    # for countries in population:
+    #     new_dict = {"country": countries['country']['value'], "population" :  countries['value']}
+    #     dict_list.append(new_dict)
+
+    dictionary = final_dict()
+    for countries in dictionary:
+        print(countries)
+
+    return final_dict
     #print(dict_list)
+    
     
     #Print the indicators
     # for item in test_list:

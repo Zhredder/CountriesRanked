@@ -3,7 +3,7 @@ import './App.css'
 
 type Country = {
   country: string;
-  value: number;
+  population: number;
 }
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
 
   function displayCountries (list: Country[]) {
     return  <ul>{list.map((item, index) => 
-                <li key={index}>{item.country}, {item.value}</li>
+                <li key={index}>{item.country}, {item.population}</li>
               )}</ul>;
   }
   
