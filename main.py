@@ -81,41 +81,35 @@ def countries():
 
         for country in gdp:
             if country.get("iso3") == country_code:
-                return country.get("value")
+                raw_value = country.get("value")
+
+                if raw_value is not None:
+                    rounded_value = round(raw_value)
+                    return rounded_value
+                else:
+                    rounded_value = 0
+                    print("country value msising")
             
-        return 'Country code not found'
+        return 'n/a'
     
     def final_dict():
         dict_list = []
         for country in population:
             new_dict = {"Country": country['country']['value'],
                         "Population" : population_lookup(country['iso3']), 
-                        "GDP Per Capita" : gdp_lookup(country['iso3'])}
+                        "GDP_Per_Capita" : gdp_lookup(country['iso3'])}
             dict_list.append(new_dict)
 
         return dict_list
-
-
-    
-
-    # dict_list = []
-    # for countries in population:
-    #     new_dict = {"country": countries['country']['value'], "population" :  countries['value']}
-    #     dict_list.append(new_dict)
 
     dictionary = final_dict()
     for countries in dictionary:
         print(countries)
 
-    return final_dict
-    #print(dict_list)
+    return dictionary
     
     
-    #Print the indicators
-    # for item in test_list:
-    #     country = f"Country: {item[0]}, Population: {item[1]}"
-    #     print(country)
-        
+
   
 
 
