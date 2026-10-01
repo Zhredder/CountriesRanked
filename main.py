@@ -88,9 +88,9 @@ def countries():
                     return rounded_value
                 else:
                     rounded_value = 0
-                    print("country value msising")
+                    
             
-        return 'n/a'
+        return '0'
     
     def final_dict():
         dict_list = []

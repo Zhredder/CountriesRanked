@@ -75,3 +75,9 @@ Padding for GDP indicator in table
 {
  padding-left: 50px;
 }
+
+.main-table th.gdp-column,
+.main-table th.indicator
+{
+  cursor: pointer;
+}
