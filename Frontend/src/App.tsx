@@ -13,6 +13,7 @@ function App() {
   const numberFormatter = new Intl.NumberFormat('en-US');
   const [isPopulationDescending, setIsPopulationDescending] = useState(false);
   const [isGDPDescending, setIsGDPDescending] = useState(false);
+  const [indicatorSelected, setIsIndicatorSelected] = useState(false);
 
   useEffect(() => {
     fetch('http://localhost:8000/api/countries')
@@ -22,7 +23,7 @@ function App() {
   }, []);
 
   function handleClickPopulation(){
-    
+
     if (!isPopulationDescending){
       setCountries(prev => [...prev].sort((a, b) => b.Population - a.Population));
       setIsPopulationDescending(true);
@@ -48,23 +49,39 @@ function App() {
   }
 
   function displayCountries (list: Country[]) {
+    const [activeHeader, setActiveHeader] = useState('name');
 
-    return      <table className="main-table">
-                <tr>
+    return      <table>
+                  <thead>
                   <th>Country</th>
-                  <th className="indicator" onClick={handleClickPopulation}>Population</th>
-                  <th className="gdp-column" onClick={handleClickGDP} >GDP_Per_Capita</th>
-                </tr>
-                {list.map((item) => 
-                <tr key={item.Country}>
-                  <td>{item.Country}</td>
-                  <td >{numberFormatter.format(item.Population)}</td>
-                  <td className="gdp-column">{item.GDP_Per_Capita}</td>
-                </tr>
-                )}</table>
-            
-              
+                  <th 
+                    onClick = {() => {
+                    setActiveHeader('Population')
+                    handleClickPopulation();
+                    }}
+                    className={activeHeader === 'Population' ? 'indicator-clicked' : 'population-column'}
+                    >Population</th>
+                  <th 
+                    onClick = {() => {
+                    setActiveHeader('GDP Per Capita')
+                    handleClickGDP();
+                    }}
+                    className={activeHeader === 'GDP Per Capita' ? 'indicator-clicked-gdp' : 'gdp-column'}
+                    >GDP Per Capita</th>
+                  </thead>
+                  <tbody>
+                   {list.map((item) => 
+                    <tr key={item.Country}>
+                      <td>{item.Country}</td>
+                      <td>{numberFormatter.format(item.Population)}</td>
+                      <td className="gdp-column">{item.GDP_Per_Capita}</td>
+                    </tr>
+                   )}
+                  </tbody>
+                </table> 
+          
   }
+  
   
   if(error != ""){
     return error

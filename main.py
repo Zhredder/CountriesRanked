@@ -103,8 +103,6 @@ def countries():
         return dict_list
 
     dictionary = final_dict()
-    for countries in dictionary:
-        print(countries)
 
     return dictionary
     

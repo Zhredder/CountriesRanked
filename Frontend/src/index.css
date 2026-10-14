@@ -70,14 +70,37 @@ button:focus-visible {
 /*
 Padding for GDP indicator in table
 */
-.main-table th.gdp-column,
-.main-table td.gdp-column
+th.gdp-column,
+td.gdp-column
 {
  padding-left: 50px;
 }
 
-.main-table th.gdp-column,
-.main-table th.indicator
+th.gdp-column,
+th.population-column
 {
   cursor: pointer;
+
+}
+
+.indicator-clicked-gdp
+{
+  padding-left: 50px;
+  cursor:pointer;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+  
+}
+
+.indicator-clicked 
+{
+  cursor:pointer;
+  text-decoration: underline;
+  text-decoration-color: black;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+  
+  
 }
